@@ -33,7 +33,7 @@ Into the folder
 ----
 
 
-`python3 -m ./venv `
+`python3 -m venv ./venv `
 
 Create the python virutal enviroment in the venv folder
 
