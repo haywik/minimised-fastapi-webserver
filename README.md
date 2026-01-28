@@ -1,2 +1,1 @@
-# basic-fastapi-webserver
-I made this a while ago, so this may be helpful :)
+# Default web server repo setup 28.jan.2026
