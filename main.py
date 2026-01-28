@@ -8,8 +8,8 @@ from fastapi.templating import Jinja2Templates
 import os
 
 app=FastAPI()
-tpl  = Jinja2Templates(directory="templates")
-static = app.mount("/static", StaticFiles(directory="static"), name="static")
+tpl  = Jinja2Templates(directory="./templates")
+static = app.mount("/static", StaticFiles(directory="./static"), name="static")
 
 
 @app.get("/")
@@ -18,7 +18,7 @@ async def index(request: Request): return RedirectResponse(url="/home")
 
 @app.get("/{path1:path}")
 async def land(request: Request,path1 : str):
-    if os.path.exists("templates/"+path1+".html") == False: return RedirectResponse(url="/bad_path")
+    if os.path.exists("./templates/"+path1+".html") == False: return RedirectResponse(url="/bad_path")
     return tpl.TemplateResponse((path1+".html"), {"request":request})
 
 
