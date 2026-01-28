@@ -17,8 +17,8 @@ async def index(request: Request): return RedirectResponse(url="/home")
 
 
 @app.get("/{path1:path}")
-async def land(request: Request,path1 : str):
-    if os.path.exists("./templates/"+(file+"html")) == False: return tpl.TemplateResponse("bad_path.html", {"request":request}) 
+async def land(request: Request,path : str):
+    if os.path.exists("./templates/"+(path+"html")) == False: return tpl.TemplateResponse("bad_path.html", {"request":request}) 
     return tpl.TemplateResponse(file, {"request":request})
 
 
