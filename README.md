@@ -56,6 +56,10 @@ Method 2:
 
 `. activate`
 
+`cd ..`
+
+`cd ..`
+
 now the venv is activated shown by the (venv) at the begging of the terminal line
 
 `pip install repo/depend.txt`
