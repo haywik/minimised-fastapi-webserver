@@ -7,6 +7,8 @@ from fastapi.templating import Jinja2Templates
 
 import os
 
+os.chdir("/home/USERNAME/repo")
+
 app=FastAPI()
 tpl  = Jinja2Templates(directory="./templates")
 static = app.mount("/static", StaticFiles(directory="./static"), name="static")
