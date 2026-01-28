@@ -53,6 +53,7 @@ Method 2:
 (good for active user interactions)
 
 `cd venv/bin`
+
 `. activate`
 
 now the venv is activated shown by the (venv) at the begging of the terminal line
