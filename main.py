@@ -16,7 +16,7 @@ static = app.mount("/static", StaticFiles(directory="./static"), name="static")
 async def index(request: Request): return RedirectResponse(url="/home")
 
 
-@app.get("/{path1:path}")
+@app.get("/{path:path}")
 async def land(request: Request,path : str):
     if os.path.exists("./templates/"+(path+"html")) == False: return tpl.TemplateResponse("bad_path.html", {"request":request}) 
     return tpl.TemplateResponse(file, {"request":request})
