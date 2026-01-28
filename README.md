@@ -62,7 +62,7 @@ Method 2:
 
 now the venv is activated shown by the (venv) at the begging of the terminal line
 
-`pip install repo/depend.txt`
+`pip install depend.txt`
 
 
 
