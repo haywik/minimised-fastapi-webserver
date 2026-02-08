@@ -5,9 +5,10 @@ from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-import os
+import os,subprocess
 
-os.chdir("/home/USERNAME/repo")
+user_of_program=str(subprocess.run("whoami",capture_output=True,text=True).stdout).replace('\n','')
+os.chdir(f"/home/{user_of_program}/repo")
 
 app=FastAPI()
 tpl  = Jinja2Templates(directory="./templates")
