@@ -7,7 +7,7 @@ from fastapi.templating import Jinja2Templates
 
 import os,subprocess
 
-user_of_program=str(subprocess.run("whoami",capture_output=True,text=True).stdout).replace('\n','')
+user_of_program=str(subprocess.run("whoami",capture_output=True,text=True).stdout).replace('\n','').replace("runner-","")
 os.chdir(f"/home/{user_of_program}/repo")
 
 app=FastAPI()
