@@ -7,8 +7,9 @@ from fastapi.templating import Jinja2Templates
 
 import os,subprocess
 
-user_of_program=str(subprocess.run("whoami",capture_output=True,text=True).stdout).replace('\n','').replace("runner-","")
-os.chdir(f"/home/{user_of_program}/repo")
+domain="DOMAIN"
+tpl  = Jinja2Templates(directory=f"/opt/web-haywik/{domain}/repo/templates")
+static = app.mount("/static", StaticFiles(directory=f"/opt/web-haywik/{domain}/repo/static"), name="static")
 
 app=FastAPI()
 tpl  = Jinja2Templates(directory="./templates")
