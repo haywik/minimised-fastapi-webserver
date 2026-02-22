@@ -4,25 +4,23 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
+from pathlib import Path
 import os,subprocess
 
-domain="DOMAIN"
-tpl  = Jinja2Templates(directory=f"/opt/web-haywik/{domain}/repo/templates")
-static = app.mount("/static", StaticFiles(directory=f"/opt/web-haywik/{domain}/repo/static"), name="static")
+tpl  = Jinja2Templates(directory=f"__file__/repo/templates")
+static = app.mount("/static", StaticFiles(directory=f"__file__/repo/static"), name="static")
 
 app=FastAPI()
-tpl  = Jinja2Templates(directory="./templates")
-static = app.mount("/static", StaticFiles(directory="./static"), name="static")
+tpl  = Jinja2Templates(directory="__file__/templates")
+static = app.mount("/static", StaticFiles(directory="__file__/static"), name="static")
 
 
 @app.get("/")
 async def index(request: Request): return RedirectResponse(url="/home")
 
-
 @app.get("/{path1:path}")
 async def land(request: Request,path1 : str):
-    if os.path.exists("./templates/"+path1+".html") == False: return RedirectResponse(url="/bad_path")
+    if os.path.exists("__file__/templates/"+Path(path1).absolute()+".html")) == False or ".." in path1: return RedirectResponse(url="/bad_path")
     return tpl.TemplateResponse((path1+".html"), {"request":request})
 
 
