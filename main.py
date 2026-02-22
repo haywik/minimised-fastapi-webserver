@@ -17,8 +17,8 @@ async def index(request: Request): return RedirectResponse(url="/home")
 
 @app.get("/{path1:path}")
 async def land(request: Request,path1 : str):
-    if os.path.exists("__file__/templates/"+Path(path1).absolute()+".html")) == False or ".." in path1:
-        raise HTTPException(status_code=status.HTTP.404_NOT_FOUND)
+    if os.path.exists("__file__/templates/"+Path(path1).absolute()+".html") == False or ".." in path1:
+        raise HTTPException(status_code=status.HTTPException_404_NOT_FOUND)
         return RedirectResponse(url="/bad_path")
     return tpl.TemplateResponse((path1+".html"), {"request":request})
 
