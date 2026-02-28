@@ -23,18 +23,15 @@ async def index(request: Request):
 async def bad_path(request: Request):
     return tpl.TemplateResponse("bad_path.html", {"request": request}, status_code=404)
 
-@app.get("/{path1:path}")
-async def land(request: Request, path1: str):
-    if not re.fullmatch(r'[a-zA-Z0-9_\-/]+', path1):
-        return RedirectResponse(url="/bad_path")
+@app.get("/{path:path}")
+async def serve_page(request: Request, path: str):
+    if not re.fullmatch(r'[a-zA-Z0-9_\-/]+', path):
+        return RedirectResponse("/bad_path")
 
-    resolved = (TEMPLATES_DIR / path1).resolve()
-    file = resolved.with_suffix(".html")
+    template_path = path + ".html"          # "about/team" → "about/team.html"
+    full_path = TEMPLATES_DIR / template_path
 
-    if not str(resolved).startswith(str(TEMPLATES_DIR.resolve())) or not file.exists():
-        return RedirectResponse(url="/bad_path")
+    if not full_path.is_file() or not full_path.resolve().is_relative_to(TEMPLATES_DIR.resolve()):
+        return RedirectResponse("/bad_path")
 
-    if os.path.exists(str(Path(path1).resolve())+".html") == False:
-        return RedirectResponse(url="/bad_path")
-    else:
-    	return tpl.TemplateResponse(path1 + ".html", {"request": request})
+    return tpl.TemplateResponse(template_path, {"request": request})
